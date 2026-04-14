@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Dashboard Mahasiswa</title>
+    <style>
+        /* Reset margin & padding dasar */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Background halaman yang lembut */
+        body {
+            background-color: #f4f7fb;
+            color: #333;
+            padding: 40px 20px;
+        }
+
+        /* Container utama seperti kartu besar */
+        .dashboard-container {
+            background: #ffffff;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Styling Header */
+        .header-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eef2f7;
+        }
+
+        .header-section h1 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .header-section h3 {
+            font-size: 16px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        /* Baris aksi (Tombol Input & Logout) */
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .action-bar h2 {
+            font-size: 18px;
+            color: #34495e;
+        }
+
+        /* Styling dasar tombol */
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Tombol Primary (Biru) */
+        .btn-primary {
+            background-color: #4361ee;
+            color: white;
+            box-shadow: 0 4px 6px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #3a53d0;
+            transform: translateY(-2px);
+        }
+
+        /* Tombol Danger (Merah) */
+        .btn-danger {
+            background-color: #ef233c;
+            color: white;
+            box-shadow: 0 4px 6px rgba(239, 35, 60, 0.2);
+        }
+
+        .btn-danger:hover {
+            background-color: #d90429;
+            transform: translateY(-2px);
+        }
+
+        /* Styling Tabel */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden; /* Untuk membuat sudut tabel membulat */
+            box-shadow: 0 0 0 1px #eef2f7;
+        }
+
+        .data-table thead {
+            background-color: #4361ee;
+            color: white;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .data-table th {
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Efek zebra & hover pada baris tabel */
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f8fafd;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #edf2fb;
+        }
+
+        /* Memusatkan teks di kolom No */
+        .data-table th:first-child,
+        .data-table td:first-child {
+            text-align: center;
+            width: 60px;
+        }
+
+        .empty-data {
+            text-align: center !important;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 30px !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="header-section">
+        <h1>MY Website - 20230140026</h1>
+        <h3>Selamat datang di aplikasi!</h3>
+    </div>
+
+    <div class="action-bar">
+        <h2>Data Mahasiswa</h2>
+        <div>
+            <a href="/form" class="btn btn-primary" style="margin-right: 10px;">+ Input Data Baru</a>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+
+    <table class="data-table">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>NIM</th>
+            <th>Jenis Kelamin</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${userList.empty}">
+            <td colspan="4" class="empty-data">Belum ada data mahasiswa yang terdaftar.</td>
+        </tr>
+        <tr th:each="u, stat : ${userList}">
+            <td th:text="${stat.count}">1</td>
+            <td th:text="${u.nama}">Nama</td>
+            <td th:text="${u.nim}">NIM</td>
+            <td th:text="${u.jenisKelamin}">Jenis Kelamin</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
