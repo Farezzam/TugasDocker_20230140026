@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Mahasiswa</title>
+    <style>
+        /* Reset dasar */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Background senada dengan halaman Home */
+        body {
+            background-color: #f4f7fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Styling Form Card */
+        .form-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-card h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 22px;
+            border-bottom: 2px solid #eef2f7;
+            padding-bottom: 15px;
+        }
+
+        /* Styling Input Group */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .input-group input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        /* Efek saat kolom input aktif */
+        .input-group input[type="text"]:focus {
+            border-color: #4361ee;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        }
+
+        /* Styling Radio Button Group */
+        .radio-group-container {
+            margin-bottom: 30px;
+        }
+
+        .radio-group-container > label {
+            display: block;
+            margin-bottom: 12px;
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .radio-options {
+            display: flex;
+            gap: 25px; /* Memberi jarak antar pilihan gender */
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 8px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            accent-color: #4361ee; /* Memberi warna biru pada radio button */
+        }
+
+        .radio-option label {
+            cursor: pointer;
+            color: #4a5568;
+            font-size: 15px;
+        }
+
+        /* Kelompok Tombol Aksi */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Tombol Submit */
+        .btn-submit {
+            width: 100%;
+            background-color: #4361ee;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #3a53d0;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* Tombol Kembali */
+        .btn-back {
+            text-align: center;
+            text-decoration: none;
+            color: #718096;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: #2d3748;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-card">
+    <h2>Form Input Mahasiswa</h2>
+
+    <form action="/submitForm" method="post" th:object="${user}">
+
+        <div class="input-group">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" th:field="*{nama}" placeholder="Masukkan nama mahasiswa" required/>
+        </div>
+
+        <div class="input-group">
+            <label for="nim">Nomor Induk Mahasiswa (NIM)</label>
+            <input type="text" id="nim" th:field="*{nim}" placeholder="Masukkan NIM" required/>
+        </div>
+
+        <div class="radio-group-container">
+            <label>Jenis Kelamin</label>
+            <div class="radio-options">
+                <div class="radio-option">
+                    <input type="radio" th:field="*{jenisKelamin}" value="Laki-laki" required id="laki"/>
+                    <label for="laki">Laki-laki</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" th:field="*{jenisKelamin}" value="Perempuan" required id="perempuan"/>
+                    <label for="perempuan">Perempuan</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn-submit">Simpan Data</button>
+            <a href="/home" class="btn-back">← Kembali ke Halaman Utama</a>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
